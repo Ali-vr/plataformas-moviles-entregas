@@ -1,0 +1,97 @@
+/* 1. Fondo oscuro y texto principal (color #ee6 ≈ #eeee66 - amarillo verdoso claro) */
+body {
+    background-color: #222;
+    color: #ee6;
+    margin: 0;
+    padding: 20px;
+    font-family: Arial, Helvetica, sans-serif; /* base sans-serif */
+}
+
+/* 2. Centrar el título principal */
+h1 {
+    text-align: center;
+}
+
+/* 3. Todos los párrafos con fuente sans-serif (ya lo ponemos en body, pero reforzamos) */
+p {
+    font-family: sans-serif;
+}
+
+/* 4. Todos los títulos en color #eee (blanco grisáceo claro) */
+h1, h2, h3 {
+    color: #eee;
+}
+
+/* 5. Borde inferior blanco a todos los <strong> */
+strong {
+    border-bottom: 1px solid white;
+}
+
+/* 6. Fondo gris #444 y negrita para .the-force */
+.the-force {
+    background-color: #444;
+    font-weight: bold;
+}
+
+/* 7. Colores para light-side y dark-side (solo cuando están dentro de .the-force) */
+.the-force.light-side {
+    color: #66f;       /* azul claro */
+}
+
+.the-force.dark-side {
+    color: #f33;       /* rojo intenso */
+}
+
+/* 8. List-style circle solo para el ul con id="og-trilogy" */
+#og-trilogy {
+    list-style-type: circle;
+}
+
+/* 9. Padding-left al segundo listado de películas 
+   (el segundo <ul class="movies-list"> → el de precuelas) */
+.movies-list:nth-of-type(2) {
+    padding-left: 40px;   /* o el valor que prefieras, 2-3em también está bien */
+}
+
+/* 10. Margin-top al último <li> del tercer listado */
+.movies-list:last-of-type li:last-child {
+    margin-top: 15px;     /* o 1em, 20px, etc. */
+}
+
+/* ──────────────────────────────────────── */
+/* Bonus Tracks (opcionales pero recomendados) */
+/* ──────────────────────────────────────── */
+
+/* 11. Todos los títulos en mayúsculas */
+h1, h2, h3 {
+    text-transform: uppercase;
+}
+
+/* 12. Primera línea del primer párrafo en #efe (verde muy claro) */
+p:first-of-type::first-line {
+    color: #efe;
+}
+
+/* 13. Título principal cambia de color al hover */
+h1:hover {
+    color: #ffeb3b;      /* amarillo Star Wars-ish, o el que prefieras */
+}
+
+/* 14. Links visitados en gris */
+a:visited {
+    color: #999;
+}
+
+/* 15. Links sin href → cursiva (en este HTML no hay, pero por si agregan después) */
+a:not([href]) {
+    font-style: italic;
+}
+
+/* 16. Fondo alternado en los <li> de TODOS los .movies-list */
+.movies-list li:nth-child(odd) {
+    background-color: #111;
+}
+
+.movies-list li:nth-child(even) {
+    background-color: #333;
+}
