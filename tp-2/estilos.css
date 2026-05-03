@@ -48,12 +48,12 @@ strong {
 }
 
 /* 9. Padding-left  */
-.movies-list:nth-of-type(2) {
+#episodio_2 {
     padding-left: 40px;   
 }
 
 /* 10. Margin-top */
-.movies-list:last-of-type li:last-child {
+#episodio_IX {
     margin-top: 15px;     
 }
 
