@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control de Versiones con Git</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container-md">
+
+  <!-- ALERT -->
+<div class="alert alert-success mt-4" role="alert">
+  Bootstrap fue instalado correctamente.
+</div>
+
+<!-- NAVBAR -->
+ <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<h1 class="text-center" class="card-text fs-5">>Control de Versiones con Git</h1>
+
+<!-- CARD -->
+<div class="card mb-4 shadow">
+  <div class="card-body">
+    <h5 class="card-title display-6">¿Qué es Git?</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Sistema de control de versiones</h6>
+    
+    <p class="card-text">
+      <strong>Git</strong> es un sistema de control de versiones distribuido, ampliamente utilizado en el desarrollo de
+      software moderno. Fue creado para gestionar proyectos de forma rápida, eficiente y colaborativa.
+    </p>
+  </div>
+</div>
+
+<!-- CAROUSEL -->
+<h2 class="mt-4">Imágenes sobre Git</h2>
+
+<div id="carouselExampleIndicators" class="carousel slide mb-5">
+
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></button>
+  </div>
+
+  <div class="carousel-inner">
+
+    <div class="carousel-item active">
+      <img src="https://git-scm.com/images/logos/downloads/Git-Logo-2Color.png"
+           class="d-block w-100"
+           style="height:400px; object-fit:contain;"
+           alt="Git logo">
+    </div>
+
+    <div class="carousel-item">
+      <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+           class="d-block w-100"
+           style="height:400px; object-fit:contain;"
+           alt="GitHub logo">
+    </div>
+
+    <div class="carousel-item">
+      <img src="https://raw.githubusercontent.com/GiacoD-07/plataformas-moviles-entregas/refs/heads/main/git-flow-comandos-flujo-trabajo.png"
+           class="d-block w-100"
+           style="height:400px; object-fit:contain;"
+           alt="Flujo Git">
+    </div>
+
+  </div>
+
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon"></span>
+  </button>
+
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon"></span>
+  </button>
+
+</div>
+
+<!-- LISTA -->
+<h2>Comandos más populares de Git</h2>
+
+<ul class="list-group border border-dark mb-5 shadow">
+    <li class="list-group-item shadow"><code>git init</code> - Inicializa un repositorio Git.</li>
+    <li class="list-group-item shadow"><code>git clone</code> - Clona un repositorio.</li>
+    <li class="list-group-item shadow"><code>git status</code> - Estado del repositorio.</li>
+    <li class="list-group-item shadow"><code>git add</code> - Agrega archivos.</li>
+    <li class="list-group-item shadow"><code>git commit</code> - Guarda cambios.</li>
+    <li class="list-group-item shadow"><code>git push</code> - Sube cambios.</li>
+    <li class="list-group-item shadow"><code>git pull</code> - Trae cambios.</li>
+    <li class="list-group-item shadow"><code>git checkout</code> - Cambia de rama.</li>
+</ul>
+
+<!-- TABLA -->
+<h2>Comparación con otros sistemas</h2>
+
+<table class="table table-hover table-striped table-bordered shadow mb-5">
+    <thead class="table-dark">
+        <tr>
+            <th>Sistema</th>
+            <th>Tipo</th>
+            <th>Popularidad</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Git</td>
+            <td>Distribuido</td>
+            <td>Muy alta</td>
+        </tr>
+        <tr>
+            <td>SVN</td>
+            <td>Centralizado</td>
+            <td>Media</td>
+        </tr>
+        <tr>
+            <td>Mercurial</td>
+            <td>Distribuido</td>
+            <td>Baja</td>
+        </tr>
+        <tr>
+            <td>Perforce</td>
+            <td>Centralizado</td>
+            <td>Especializado</td>
+        </tr>
+    </tbody>
+</table>
+
+<!-- ACCORDION -->
+<h2>Más sobre Git</h2>
+
+<div class="accordion mb-5 shadow" id="accordionPanelsStayOpenExample">
+
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne">
+        ¿Qué ventajas tiene Git?
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+      <div class="accordion-body">
+        Git permite trabajar en equipo, guardar historial de cambios y recuperar versiones anteriores.
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo">
+        ¿Por qué es tan utilizado?
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
+      <div class="accordion-body">
+        Es rápido, gratuito y funciona con GitHub.
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion-item">
+    <h2 class="accordion-header">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree">
+        ¿Tiene desventajas?
+      </button>
+    </h2>
+    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
+      <div class="accordion-body">
+        Puede ser difícil de aprender al principio.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FORM -->
+<h2>¿Ya usaste Git?</h2>
+
+<form class="mt-4">
+    <label>Tu nombre:</label>
+    <input type="text" class="form-control">
+
+    <label class="mt-2">¿Qué usás más?</label>
+    <select class="form-select">
+        <option>Git</option>
+        <option>Git + GitHub</option>
+        <option>Otro sistema</option>
+        <option>Ninguno</option>
+    </select>
+
+    <input type="submit" value="Enviar" class="btn btn-success mt-3">
+</form>
+
+</div>
+
+<!-- BOTON MODAL -->
+<button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Abrir información
+</button>
+
+<!-- MODAL -->
+<div class="modal fade" id="exampleModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">Información sobre Git</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <div class="modal-body">
+        Git es uno de los sistemas de control de versiones más usados del mundo. (estoy cansado jefe...)
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cerrar
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
