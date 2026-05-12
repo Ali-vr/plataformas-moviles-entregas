@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TP 7 - Bootstrap</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+        <div class="container">
+
+            <a class="navbar-brand" href="#">
+                Mi Sitio
+            </a>
+
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#menu">
+
+                <span class="navbar-toggler-icon"></span>
+
+            </button>
+
+            <div class="collapse navbar-collapse" id="menu">
+
+                <ul class="navbar-nav ms-auto">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">
+                            Link_1
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Link_2
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            Link_3
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- CAROUSEL -->
+
+    <div id="carouselExample" class="carousel slide">
+
+        <div class="carousel-inner">
+
+            <div class="carousel-item active bg-primary text-white text-center p-5">
+                <h2>Hola Perdida</h2>
+            </div>
+
+            <div class="carousel-item bg-success text-white text-center p-5">
+                <h2>Soy el ex Amor de tu vida</h2>
+            </div>
+
+            <div class="carousel-item bg-danger text-white text-center p-5">
+                <h2>Volví para volver a hacerte mía, Porque un amor así no sе olvida </h2>
+            </div>
+
+        </div>
+
+        <button class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carouselExample"
+                data-bs-slide="prev">
+
+            <span class="carousel-control-prev-icon"></span>
+
+        </button>
+
+        <button class="carousel-control-next"
+                type="button"
+                data-bs-target="#carouselExample"
+                data-bs-slide="next">
+
+            <span class="carousel-control-next-icon"></span>
+
+        </button>
+
+    </div>
+
+<!-- CUADRO PRINCIPAL -->
+
+<div class="container mt-5">
+
+    <div class="card p-4">
+
+        <h2 class="text-center">
+            Articulo
+        </h2>
+
+        <h4 class="text-center text-secondary">
+            SubArticulo
+        </h4>
+
+        <p class="mt-4">
+            no voy a escribir lo que pone en la imagen de referencia, ya tengo la cabeza re quemada
+            <!-- //Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            //Repellendus quas asperiores doloremque recusandae,
+            //deserunt aliquid officiis vero tempore molestiae
+            //veritatis reprehenderit doloribus consequatur
+            //voluptatem impedit labore ipsam pariatur.--> 
+            
+            <!-- // no contabas con mi astucia ehh... jaja-->
+        </p>
+
+        <p>
+            tengo sueño perdon, no me maten con las preguntas
+           <!-- // Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Doloribus, aspernatur. Quaerat blanditiis maxime
+            distinctio praesentium perferendis.-->
+        </p>
+
+<div class="row mt-4 g-3">
+
+    <!-- CARD 1 -->
+
+    <div class="col-12 col-sm-6 col-md-3">
+
+        <div class="card h-100">
+
+            <img src="https://placehold.co/300x200"
+                 class="card-img-top"
+                 alt="img1">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    Carta 1
+                </h5>
+
+                <p class="card-text">
+                    Texto de ejemplo para la carta 1.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CARD 2 -->
+
+    <div class="col-12 col-sm-6 col-md-3">
+
+        <div class="card h-100">
+
+            <img src="https://placehold.co/300x200"
+                 class="card-img-top"
+                 alt="img2">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    Carta 2
+                </h5>
+
+                <p class="card-text">
+                    Texto de ejemplo para la carta 2.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CARD 3 -->
+
+    <div class="col-12 col-sm-6 col-md-3">
+
+        <div class="card h-100">
+
+            <img src="https://placehold.co/300x200"
+                 class="card-img-top"
+                 alt="img3">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    Carta 3
+                </h5>
+
+                <p class="card-text">
+                    Texto de ejemplo para la carta 3.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- CARD 4 -->
+
+    <div class="col-12 col-sm-6 col-md-3">
+
+        <div class="card h-100">
+
+            <img src="https://placehold.co/300x200"
+                 class="card-img-top"
+                 alt="img4">
+
+            <div class="card-body">
+
+                <h5 class="card-title">
+                    Carta 4
+                </h5>
+
+                <p class="card-text">
+                    Texto de ejemplo para la carta 4.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+<!-- FAQ -->
+
+<div class="container mt-5">
+
+    <div class="card p-4">
+
+        <h2 class="mb-4">
+            FAQ
+        </h2>
+
+        <div class="accordion" id="faqAccordion">
+
+            <!-- ITEM 1 -->
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button class="accordion-button"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#item1">
+
+                        Item 1
+
+                    </button>
+
+                </h2>
+
+                <div id="item1"
+                     class="accordion-collapse collapse show"
+                     data-bs-parent="#faqAccordion">
+
+                    <div class="accordion-body">
+
+                        Texto del item 1.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ITEM 2 -->
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#item2">
+
+                        Item 2
+
+                    </button>
+
+                </h2>
+
+                <div id="item2"
+                     class="accordion-collapse collapse"
+                     data-bs-parent="#faqAccordion">
+
+                    <div class="accordion-body">
+
+                        Texto del item 2.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ITEM 3 -->
+
+            <div class="accordion-item">
+
+                <h2 class="accordion-header">
+
+                    <button class="accordion-button collapsed"
+                            type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#item3">
+
+                        Item 3
+
+                    </button>
+
+                </h2>
+
+                <div id="item3"
+                     class="accordion-collapse collapse"
+                     data-bs-parent="#faqAccordion">
+
+                    <div class="accordion-body">
+
+                        Texto del item 3.
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FORMULARIO -->
+
+<div class="container mt-5 mb-5">
+
+    <div class="card p-4">
+
+        <form>
+
+            <!-- NOMBRE -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Nombre
+                </label>
+
+                <input type="text"
+                       class="form-control"
+                       placeholder="Ingrese su nombre">
+
+            </div>
+
+            <!-- GMAIL -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Gmail
+                </label>
+
+                <input type="email"
+                       class="form-control"
+                       placeholder="Ingrese su gmail">
+
+            </div>
+
+            <!-- COMENTARIO -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Comentario
+                </label>
+
+                <textarea class="form-control"
+                          rows="4"
+                          placeholder="Escriba un comentario"></textarea>
+
+            </div>
+
+            <!-- BOTONES -->
+
+            <button type="submit"
+                    class="btn btn-primary">
+
+                Enviar
+
+            </button>
+
+            <button type="reset"
+                    class="btn btn-secondary">
+
+                Limpiar
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+    <script src="js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
