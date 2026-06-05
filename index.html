@@ -1,30 +1,524 @@
 <!DOCTYPE html>
-<html>
-   <head>
-      <title>Hola Mundo!</title>
-   </head>
-   <body>
-     <h1>Trabajos Prácticos</h1>
-     <p>Listado de trabajos prácticos para la materia Plataformas Móviles</p>
-     <ul>
-       <li><a href="tp-1/">Primer Trabajo</a></li>
-        <li><a href="tp-2/">Segundo Trabajo(Selectores)</a></li>
-        <li><a href="tp-3/">Tercer Trabajo(Especificidad)</a></li>
-        <li><a href="tp-4/">cuarto Trabajo(Media Queries)</a></li>
-        <li><a href="tp-5/">Quinto Trabajo(Bootstrap)</a></li>
-        <li><a href="tp-6/">Sexto Trabajo(Grilla Bootstrap)</a></li>
-        <li><a href="tp-7/">septimo Trabajo(Bootstrap (2))</a></li>
-        <li><a href="tp-8/">Octavo Trabajo(Funciones)</a></li>
-        <li><a href="tp-9/">Noveno Trabajo(Listas)</a></li>
-        <li><a href="tp-10/">Decimo Trabajo(Objetos)</a></li>
-        <li><a href="tp-11/">Once Trabajo(Listas y Objetos)</a></li>
-        <li><a href="/tp-12/index.html">Doce Trabajo</a></li>
-        <li><a href="/tp-13/index.html">Trece Trabajo</a></li>
-        <li><a href="/tp-14/index.html">Catorce Trabajo</a></li>
-        <li><a href="/tp-15/index.html">Quince Trabajo</a></li>
-        <li><a href="/tp-16/index.html">Dieciseis Trabajo</a></li>
-        
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Ali.vr — Plataformas Móviles</title>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323:wght@400&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --bg:#0a0a12;--panel:#111122;--border:#2a2a5a;
+  --gold:#f7d44c;--green:#39ff14;--red:#ff3a3a;
+  --blue:#3af7ff;--purple:#b06aff;--dim:#555577;--text:#e8e8f0;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{
+  background-color:var(--bg);
+  background-image:linear-gradient(rgba(58,247,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(58,247,255,.03) 1px,transparent 1px);
+  background-size:32px 32px;
+  font-family:'Press Start 2P',monospace;color:var(--text);
+  min-height:100vh;padding:2rem 1rem 4rem;
+}
+header{text-align:center;padding:2.5rem 1rem 1rem;}
+.scanline-badge{display:inline-block;font-family:'VT323',monospace;font-size:1rem;letter-spacing:4px;color:var(--blue);text-transform:uppercase;margin-bottom:.75rem;animation:blink 1.4s step-end infinite;}
+h1{font-size:clamp(.85rem,2.5vw,1.25rem);color:var(--gold);text-shadow:0 0 12px var(--gold),0 0 30px rgba(247,212,76,.35);line-height:1.6;margin-bottom:.5rem;}
+.subtitle{font-family:'VT323',monospace;font-size:1.3rem;color:var(--dim);letter-spacing:2px;}
+.coin-strip{margin:1.5rem auto 0;display:flex;justify-content:center;gap:.4rem;font-size:.55rem;color:var(--gold);}
+.coin{animation:coinpop .6s ease-in-out infinite alternate;}
+.coin:nth-child(2){animation-delay:.15s;}.coin:nth-child(3){animation-delay:.3s;}
+.select-banner{text-align:center;margin:2.5rem auto 2rem;position:relative;}
+.select-banner::before,.select-banner::after{content:'▶▶▶';color:var(--purple);font-size:.55rem;position:absolute;top:50%;transform:translateY(-50%);}
+.select-banner::before{left:0;}.select-banner::after{right:0;content:'◀◀◀';}
+.select-banner span{font-size:clamp(.6rem,1.8vw,.8rem);color:var(--green);text-shadow:0 0 8px var(--green);letter-spacing:3px;}
+.level-list{max-width:800px;margin:0 auto;display:flex;flex-direction:column;gap:0;}
+.level-item{display:grid;grid-template-columns:64px 1fr auto;align-items:center;gap:1rem;padding:1rem 1.2rem;background:var(--panel);border:2px solid var(--border);border-bottom:none;position:relative;transition:background .15s,border-color .15s;text-decoration:none;color:inherit;cursor:pointer;}
+.level-item:first-child{border-radius:6px 6px 0 0;}
+.level-item:last-child{border-bottom:2px solid var(--border);border-radius:0 0 6px 6px;}
+.level-item:hover{background:#181832;border-color:var(--purple);z-index:1;}
+.level-item:hover .level-name{color:var(--gold);text-shadow:0 0 8px var(--gold);}
+.level-item:hover .arrow{opacity:1;transform:translateX(4px);}
+.sprite-wrap{width:56px;height:56px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.sprite-wrap svg{image-rendering:pixelated;overflow:visible;}
+.level-info{overflow:hidden;}
+.level-num{font-size:.42rem;color:var(--dim);letter-spacing:2px;margin-bottom:.35rem;}
+.level-name{font-size:clamp(.5rem,1.6vw,.7rem);color:var(--text);line-height:1.5;transition:color .15s;}
+.level-tag{display:inline-block;margin-top:.4rem;font-family:'VT323',monospace;font-size:.9rem;padding:1px 6px;border:1px solid;border-radius:2px;letter-spacing:1px;}
+.arrow{font-size:.65rem;color:var(--purple);opacity:0;transition:opacity .15s,transform .15s;}
+.tag-html{color:var(--gold);border-color:var(--gold);}
+.tag-css{color:var(--blue);border-color:var(--blue);}
+.tag-js{color:var(--green);border-color:var(--green);}
+.tag-boot{color:var(--purple);border-color:var(--purple);}
+.tag-php{color:#ff8c42;border-color:#ff8c42;}
 
-     </ul>
-   </body>
+/* LOADING OVERLAY */
+#loading-overlay{position:fixed;inset:0;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;opacity:1;transition:opacity .3s;gap:2rem;pointer-events:none;}
+#loading-overlay.hidden{opacity:0;}
+#loading-overlay.gone{display:none;}
+.load-title{font-size:clamp(.55rem,1.8vw,.8rem);color:var(--gold);letter-spacing:3px;text-align:center;}
+.load-game{font-family:'VT323',monospace;font-size:1.8rem;color:var(--blue);letter-spacing:2px;text-align:center;animation:blink 1s step-end infinite;}
+.load-bar-wrap{width:280px;height:18px;border:2px solid var(--border);position:relative;overflow:hidden;}
+.load-bar{height:100%;width:0;background:var(--green);transition:width .08s linear;}
+.load-pct{font-size:.55rem;color:var(--green);margin-top:.5rem;letter-spacing:2px;}
+
+footer{text-align:center;margin-top:3rem;font-family:'VT323',monospace;font-size:1rem;color:var(--dim);letter-spacing:2px;}
+footer span{color:var(--red);}
+
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+@keyframes coinpop{from{transform:translateY(0);}to{transform:translateY(-4px);}}
+
+/* CHARACTER HOVER ANIMATIONS */
+@keyframes mario-jump{0%,100%{transform:translateY(0);}45%{transform:translateY(-16px);}55%{transform:translateY(-16px);}}
+@keyframes sonic-dash{0%{transform:translateX(0) scaleX(1) rotate(0deg);}30%{transform:translateX(8px) scaleX(0.75) rotate(-10deg);}60%{transform:translateX(-5px) scaleX(1.1) rotate(5deg);}100%{transform:translateX(0) scaleX(1) rotate(0deg);}}
+@keyframes scorpion-spear{0%,100%{transform:translateX(0);}35%{transform:translateX(10px);}65%{transform:translateX(-5px);}}
+@keyframes link-spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+@keyframes ryu-kick{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-10px) rotate(-20deg);}}
+@keyframes pac-chomp{0%,100%{transform:scaleX(1) scaleY(1);}50%{transform:scaleX(1.18) scaleY(0.9);}}
+@keyframes snake-crawl{0%,100%{transform:translateX(0) translateY(0);}25%{transform:translateX(5px) translateY(-3px);}75%{transform:translateX(-5px) translateY(3px);}}
+@keyframes samus-charge{0%,100%{filter:drop-shadow(0 0 2px #39ff14) brightness(1);}50%{filter:drop-shadow(0 0 10px #39ff14) brightness(1.5);}}
+@keyframes cloud-float{0%,100%{transform:translateY(0);}50%{transform:translateY(-8px);}}
+@keyframes ghost-wave{0%,100%{transform:scaleY(1) translateY(0) scaleX(1);}50%{transform:scaleY(0.9) translateY(3px) scaleX(1.05);}}
+@keyframes kirby-bounce{0%,100%{transform:scaleY(1) scaleX(1);}40%{transform:scaleY(0.78) scaleX(1.2);}70%{transform:scaleY(1.15) scaleX(0.92);}}
+@keyframes toad-hop{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-12px) rotate(10deg);}}
+@keyframes bowser-stomp{0%,100%{transform:translateY(0) scaleY(1);}50%{transform:translateY(5px) scaleY(0.88);}}
+@keyframes peach-twirl{0%{transform:rotate(-10deg);}50%{transform:rotate(10deg);}100%{transform:rotate(-10deg);}}
+@keyframes yoshi-lick{0%,75%,100%{transform:translateX(0);}50%{transform:translateX(8px);}}
+@keyframes dk-pound{0%,100%{transform:translateY(0) scaleY(1);}40%{transform:translateY(-7px) scaleY(1.05);}65%{transform:translateY(3px) scaleY(0.93);}}
+
+.level-item:hover .mario-anim{animation:mario-jump .45s ease-in-out infinite;}
+.level-item:hover .sonic-anim{animation:sonic-dash .35s ease-in-out infinite;}
+.level-item:hover .scorpion-anim{animation:scorpion-spear .5s ease-in-out infinite;}
+.level-item:hover .link-anim{animation:link-spin .55s linear infinite;}
+.level-item:hover .ryu-anim{animation:ryu-kick .5s ease-in-out infinite;}
+.level-item:hover .pac-anim{animation:pac-chomp .3s ease-in-out infinite;}
+.level-item:hover .snake-anim{animation:snake-crawl .6s ease-in-out infinite;}
+.level-item:hover .samus-anim{animation:samus-charge .6s ease-in-out infinite;}
+.level-item:hover .cloud-anim{animation:cloud-float .75s ease-in-out infinite;}
+.level-item:hover .ghost-anim{animation:ghost-wave .7s ease-in-out infinite;}
+.level-item:hover .kirby-anim{animation:kirby-bounce .4s ease-in-out infinite;}
+.level-item:hover .toad-anim{animation:toad-hop .5s ease-in-out infinite;}
+.level-item:hover .bowser-anim{animation:bowser-stomp .5s ease-in-out infinite;}
+.level-item:hover .peach-anim{animation:peach-twirl .8s ease-in-out infinite;}
+.level-item:hover .yoshi-anim{animation:yoshi-lick .6s ease-in-out infinite;}
+.level-item:hover .dk-anim{animation:dk-pound .5s ease-in-out infinite;}
+</style>
+</head>
+<body>
+
+<div id="loading-overlay" class="gone">
+  <div class="load-title">LOADING STAGE</div>
+  <div id="load-game-name" class="load-game">...</div>
+  <div class="load-bar-wrap"><div id="load-bar" class="load-bar"></div></div>
+  <div id="load-pct" class="load-pct">0%</div>
+</div>
+
+<header>
+  <div class="scanline-badge">INSERT COIN</div>
+  <h1>PLATAFORMAS MÓVILES</h1>
+  <div class="subtitle">Trabajos Prácticos — Ali.vr</div>
+  <div class="coin-strip">
+    <span class="coin">●</span><span class="coin">●</span><span class="coin">●</span>
+  </div>
+</header>
+
+<div class="select-banner"><span>— SELECT YOUR STAGE —</span></div>
+<div class="level-list" id="levels"></div>
+<footer>&copy; 2025 ALI.VR &nbsp;·&nbsp; MADE WITH <span>♥</span> &amp; BOOTSTRAP</footer>
+
+<script>
+const sprites={
+mario:`<svg width="48" height="48" viewBox="0 0 16 16" class="mario-anim" style="image-rendering:pixelated">
+  <rect x="5" y="1" width="6" height="2" fill="#e52222"/>
+  <rect x="4" y="2" width="8" height="2" fill="#e52222"/>
+  <rect x="4" y="4" width="8" height="3" fill="#fba54c"/>
+  <rect x="5" y="5" width="2" height="1" fill="#fff"/>
+  <rect x="9" y="5" width="2" height="1" fill="#fff"/>
+  <rect x="6" y="5" width="1" height="1" fill="#111"/>
+  <rect x="10" y="5" width="1" height="1" fill="#111"/>
+  <rect x="5" y="7" width="6" height="1" fill="#5a2d0c"/>
+  <rect x="4" y="8" width="8" height="3" fill="#e52222"/>
+  <rect x="5" y="9" width="6" height="1" fill="#ffde59"/>
+  <rect x="4" y="11" width="3" height="3" fill="#5a2d0c"/>
+  <rect x="9" y="11" width="3" height="3" fill="#5a2d0c"/>
+  <rect x="3" y="13" width="4" height="1" fill="#e52222"/>
+  <rect x="9" y="13" width="4" height="1" fill="#e52222"/>
+  <rect x="2" y="8" width="2" height="2" fill="#fba54c"/>
+  <rect x="12" y="8" width="2" height="2" fill="#fba54c"/>
+</svg>`,
+
+sonic:`<svg width="48" height="48" viewBox="0 0 16 16" class="sonic-anim" style="image-rendering:pixelated">
+  <rect x="9" y="1" width="2" height="2" fill="#0070d8"/>
+  <rect x="11" y="2" width="2" height="2" fill="#0070d8"/>
+  <rect x="13" y="3" width="2" height="2" fill="#0070d8"/>
+  <rect x="5" y="2" width="6" height="4" fill="#0070d8"/>
+  <rect x="3" y="3" width="4" height="3" fill="#0070d8"/>
+  <rect x="9" y="3" width="3" height="2" fill="#fdd7a6"/>
+  <rect x="10" y="3" width="2" height="1" fill="#fdd7a6"/>
+  <rect x="11" y="4" width="1" height="1" fill="#111"/>
+  <rect x="10" y="5" width="2" height="1" fill="#c04040"/>
+  <rect x="5" y="6" width="6" height="4" fill="#0070d8"/>
+  <rect x="4" y="10" width="4" height="2" fill="#e52222"/>
+  <rect x="8" y="10" width="4" height="2" fill="#e52222"/>
+  <rect x="3" y="11" width="3" height="2" fill="#f5f5f5"/>
+  <rect x="10" y="11" width="3" height="2" fill="#f5f5f5"/>
+  <rect x="3" y="7" width="2" height="2" fill="#fff"/>
+  <rect x="11" y="6" width="2" height="2" fill="#fff"/>
+  <rect x="1" y="8" width="3" height="1" fill="#ffde59" opacity=".8"/>
+  <rect x="0" y="10" width="2" height="1" fill="#ffde59" opacity=".5"/>
+</svg>`,
+
+scorpion:`<svg width="48" height="48" viewBox="0 0 16 16" class="scorpion-anim" style="image-rendering:pixelated">
+  <rect x="5" y="1" width="6" height="1" fill="#c8a030"/>
+  <rect x="5" y="1" width="6" height="5" fill="#e8c84a"/>
+  <rect x="5" y="1" width="6" height="1" fill="#c8a030"/>
+  <rect x="6" y="3" width="1" height="1" fill="#ffaa00"/>
+  <rect x="9" y="3" width="1" height="1" fill="#ffaa00"/>
+  <rect x="6" y="5" width="4" height="1" fill="#c8a030"/>
+  <rect x="5" y="6" width="6" height="4" fill="#e8c84a"/>
+  <rect x="6" y="7" width="4" height="2" fill="#c8a030"/>
+  <rect x="2" y="7" width="3" height="2" fill="#e8c84a"/>
+  <rect x="11" y="7" width="3" height="2" fill="#e8c84a"/>
+  <rect x="0" y="8" width="2" height="1" fill="#aaa"/>
+  <rect x="14" y="8" width="2" height="1" fill="#aaa"/>
+  <rect x="5" y="10" width="2" height="4" fill="#e8c84a"/>
+  <rect x="9" y="10" width="2" height="4" fill="#e8c84a"/>
+  <rect x="4" y="13" width="3" height="1" fill="#c8a030"/>
+  <rect x="9" y="13" width="3" height="1" fill="#c8a030"/>
+</svg>`,
+
+link:`<svg width="48" height="48" viewBox="0 0 16 16" class="link-anim" style="image-rendering:pixelated">
+  <rect x="5" y="0" width="6" height="1" fill="#4d9e3a"/>
+  <rect x="4" y="1" width="8" height="3" fill="#4d9e3a"/>
+  <rect x="5" y="3" width="6" height="4" fill="#fdd7a6"/>
+  <rect x="6" y="5" width="1" height="1" fill="#111"/>
+  <rect x="9" y="5" width="1" height="1" fill="#111"/>
+  <rect x="6" y="6" width="4" height="1" fill="#e57"/>
+  <rect x="4" y="7" width="8" height="4" fill="#4d9e3a"/>
+  <rect x="5" y="8" width="6" height="1" fill="#3a7a2c"/>
+  <rect x="2" y="7" width="3" height="4" fill="#3a7aff"/>
+  <rect x="3" y="8" width="1" height="2" fill="#ffd700"/>
+  <rect x="11" y="4" width="1" height="7" fill="#ddd"/>
+  <rect x="10" y="7" width="3" height="1" fill="#c8a030"/>
+  <rect x="5" y="11" width="2" height="3" fill="#4d9e3a"/>
+  <rect x="9" y="11" width="2" height="3" fill="#4d9e3a"/>
+  <rect x="4" y="13" width="3" height="1" fill="#5a2d0c"/>
+  <rect x="9" y="13" width="3" height="1" fill="#5a2d0c"/>
+</svg>`,
+
+ryu:`<svg width="48" height="48" viewBox="0 0 16 16" class="ryu-anim" style="image-rendering:pixelated">
+  <rect x="4" y="1" width="8" height="2" fill="#e52222"/>
+  <rect x="5" y="2" width="6" height="4" fill="#fdd7a6"/>
+  <rect x="6" y="4" width="1" height="1" fill="#111"/>
+  <rect x="9" y="4" width="1" height="1" fill="#111"/>
+  <rect x="7" y="6" width="3" height="1" fill="#5a2d0c"/>
+  <rect x="4" y="6" width="8" height="4" fill="#f5f5f0"/>
+  <rect x="7" y="7" width="2" height="3" fill="#e0ddd5"/>
+  <rect x="4" y="10" width="8" height="1" fill="#e0ddd5"/>
+  <rect x="4" y="11" width="8" height="3" fill="#f5f5f0"/>
+  <rect x="1" y="5" width="3" height="2" fill="#fdd7a6"/>
+  <rect x="12" y="4" width="3" height="2" fill="#fdd7a6"/>
+  <rect x="12" y="3" width="3" height="2" fill="#39ccff" opacity=".9"/>
+</svg>`,
+
+pacman:`<svg width="48" height="48" viewBox="0 0 16 16" class="pac-anim" style="image-rendering:pixelated">
+  <rect x="3" y="4" width="10" height="8" fill="#ffde00"/>
+  <rect x="4" y="3" width="8" height="2" fill="#ffde00"/>
+  <rect x="4" y="11" width="8" height="2" fill="#ffde00"/>
+  <rect x="9" y="5" width="2" height="2" fill="#111"/>
+  <rect x="8" y="8" width="5" height="1" fill="#111"/>
+  <rect x="10" y="7" width="3" height="1" fill="#111"/>
+  <rect x="11" y="9" width="2" height="1" fill="#111"/>
+  <rect x="0" y="8" width="2" height="2" fill="#fff"/>
+  <rect x="12" y="5" width="2" height="2" fill="#ff6af7"/>
+  <rect x="11" y="6" width="4" height="3" fill="#ff6af7"/>
+  <rect x="11" y="9" width="1" height="2" fill="#ff6af7"/>
+  <rect x="13" y="9" width="1" height="2" fill="#ff6af7"/>
+  <rect x="12" y="7" width="1" height="1" fill="#fff"/>
+  <rect x="14" y="7" width="1" height="1" fill="#fff"/>
+</svg>`,
+
+snake:`<svg width="48" height="48" viewBox="0 0 16 16" class="snake-anim" style="image-rendering:pixelated">
+  <rect x="4" y="1" width="8" height="2" fill="#cc3322"/>
+  <rect x="4" y="2" width="8" height="5" fill="#5a7a45"/>
+  <rect x="4" y="3" width="4" height="2" fill="#333"/>
+  <rect x="9" y="3" width="1" height="1" fill="#7af"/>
+  <rect x="5" y="6" width="6" height="1" fill="#4a6838"/>
+  <rect x="4" y="7" width="8" height="5" fill="#5a7a45"/>
+  <rect x="5" y="8" width="2" height="1" fill="#3a5a28"/>
+  <rect x="8" y="9" width="3" height="1" fill="#3a5a28"/>
+  <rect x="6" y="10" width="2" height="1" fill="#3a5a28"/>
+  <rect x="4" y="12" width="3" height="2" fill="#5a7a45"/>
+  <rect x="9" y="12" width="3" height="2" fill="#5a7a45"/>
+  <rect x="3" y="13" width="4" height="1" fill="#222"/>
+  <rect x="9" y="13" width="4" height="1" fill="#222"/>
+  <rect x="12" y="8" width="4" height="1" fill="#333"/>
+  <rect x="13" y="7" width="2" height="2" fill="#555"/>
+</svg>`,
+
+samus:`<svg width="48" height="48" viewBox="0 0 16 16" class="samus-anim" style="image-rendering:pixelated">
+  <rect x="4" y="1" width="8" height="6" fill="#e8a020"/>
+  <rect x="3" y="2" width="10" height="4" fill="#e8a020"/>
+  <rect x="5" y="2" width="6" height="3" fill="#39ccff"/>
+  <rect x="6" y="3" width="4" height="1" fill="#7af7ff"/>
+  <rect x="2" y="6" width="4" height="3" fill="#e8a020"/>
+  <rect x="10" y="6" width="4" height="3" fill="#e8a020"/>
+  <rect x="4" y="7" width="8" height="4" fill="#c07010"/>
+  <rect x="5" y="8" width="6" height="2" fill="#e8a020"/>
+  <rect x="11" y="8" width="5" height="3" fill="#e8a020"/>
+  <rect x="14" y="8" width="2" height="3" fill="#555"/>
+  <rect x="15" y="9" width="1" height="1" fill="#39ff14"/>
+  <rect x="5" y="11" width="3" height="3" fill="#c07010"/>
+  <rect x="8" y="11" width="3" height="3" fill="#c07010"/>
+  <rect x="4" y="13" width="4" height="1" fill="#e8a020"/>
+  <rect x="8" y="13" width="4" height="1" fill="#e8a020"/>
+</svg>`,
+
+cloud:`<svg width="48" height="48" viewBox="0 0 16 16" class="cloud-anim" style="image-rendering:pixelated">
+  <rect x="5" y="0" width="6" height="1" fill="#ccdd55"/>
+  <rect x="3" y="1" width="2" height="2" fill="#ccdd55"/>
+  <rect x="11" y="1" width="2" height="2" fill="#ccdd55"/>
+  <rect x="5" y="1" width="6" height="3" fill="#ccdd55"/>
+  <rect x="5" y="3" width="6" height="4" fill="#fdd7a6"/>
+  <rect x="4" y="3" width="2" height="2" fill="#ccdd55"/>
+  <rect x="6" y="5" width="1" height="1" fill="#3399ff"/>
+  <rect x="9" y="5" width="1" height="1" fill="#3399ff"/>
+  <rect x="7" y="6" width="2" height="1" fill="#c8877a"/>
+  <rect x="4" y="7" width="8" height="4" fill="#334477"/>
+  <rect x="5" y="8" width="6" height="1" fill="#445588"/>
+  <rect x="2" y="7" width="3" height="2" fill="#555"/>
+  <rect x="11" y="7" width="3" height="2" fill="#555"/>
+  <rect x="10" y="3" width="2" height="8" fill="#9aa0a8"/>
+  <rect x="9" y="3" width="1" height="3" fill="#c8a030"/>
+  <rect x="5" y="11" width="2" height="3" fill="#334477"/>
+  <rect x="9" y="11" width="2" height="3" fill="#334477"/>
+  <rect x="4" y="13" width="3" height="1" fill="#222"/>
+  <rect x="9" y="13" width="3" height="1" fill="#222"/>
+</svg>`,
+
+ghost:`<svg width="48" height="48" viewBox="0 0 16 16" class="ghost-anim" style="image-rendering:pixelated">
+  <rect x="3" y="5" width="10" height="7" fill="#f0f0ff"/>
+  <rect x="4" y="4" width="8" height="2" fill="#f0f0ff"/>
+  <rect x="4" y="12" width="2" height="2" fill="#f0f0ff"/>
+  <rect x="7" y="12" width="2" height="2" fill="#f0f0ff"/>
+  <rect x="10" y="12" width="2" height="2" fill="#f0f0ff"/>
+  <rect x="5" y="7" width="2" height="2" fill="#111"/>
+  <rect x="9" y="7" width="2" height="2" fill="#111"/>
+  <rect x="6" y="7" width="1" height="1" fill="#fff"/>
+  <rect x="10" y="7" width="1" height="1" fill="#fff"/>
+  <rect x="6" y="10" width="1" height="1" fill="#111"/>
+  <rect x="9" y="10" width="1" height="1" fill="#111"/>
+  <rect x="7" y="11" width="2" height="1" fill="#111"/>
+  <rect x="2" y="5" width="1" height="5" fill="#d0d0ef" opacity=".5"/>
+  <rect x="13" y="5" width="1" height="5" fill="#d0d0ef" opacity=".5"/>
+</svg>`,
+
+kirby:`<svg width="48" height="48" viewBox="0 0 16 16" class="kirby-anim" style="image-rendering:pixelated">
+  <rect x="3" y="4" width="10" height="8" fill="#ff9ecd"/>
+  <rect x="4" y="3" width="8" height="2" fill="#ff9ecd"/>
+  <rect x="2" y="5" width="2" height="6" fill="#ff9ecd"/>
+  <rect x="12" y="5" width="2" height="6" fill="#ff9ecd"/>
+  <rect x="4" y="11" width="8" height="2" fill="#ff9ecd"/>
+  <rect x="4" y="8" width="2" height="1" fill="#ff6aa0"/>
+  <rect x="10" y="8" width="2" height="1" fill="#ff6aa0"/>
+  <rect x="5" y="6" width="2" height="2" fill="#111"/>
+  <rect x="9" y="6" width="2" height="2" fill="#111"/>
+  <rect x="6" y="6" width="1" height="1" fill="#fff"/>
+  <rect x="10" y="6" width="1" height="1" fill="#fff"/>
+  <rect x="7" y="9" width="2" height="1" fill="#cc3366"/>
+  <rect x="4" y="12" width="3" height="2" fill="#e8556a"/>
+  <rect x="9" y="12" width="3" height="2" fill="#e8556a"/>
+</svg>`,
+
+toad:`<svg width="48" height="48" viewBox="0 0 16 16" class="toad-anim" style="image-rendering:pixelated">
+  <rect x="3" y="1" width="10" height="4" fill="#fff"/>
+  <rect x="2" y="3" width="12" height="3" fill="#fff"/>
+  <rect x="4" y="2" width="2" height="2" fill="#e52222"/>
+  <rect x="8" y="1" width="2" height="2" fill="#e52222"/>
+  <rect x="11" y="3" width="2" height="2" fill="#e52222"/>
+  <rect x="5" y="5" width="6" height="4" fill="#fdd7a6"/>
+  <rect x="6" y="6" width="1" height="1" fill="#111"/>
+  <rect x="9" y="6" width="1" height="1" fill="#111"/>
+  <rect x="7" y="8" width="2" height="1" fill="#e8877a"/>
+  <rect x="4" y="9" width="8" height="3" fill="#3a7aff"/>
+  <rect x="6" y="10" width="4" height="1" fill="#fff"/>
+  <rect x="5" y="12" width="2" height="2" fill="#fdd7a6"/>
+  <rect x="9" y="12" width="2" height="2" fill="#fdd7a6"/>
+  <rect x="4" y="13" width="3" height="1" fill="#e52222"/>
+  <rect x="9" y="13" width="3" height="1" fill="#e52222"/>
+</svg>`,
+
+bowser:`<svg width="48" height="48" viewBox="0 0 16 16" class="bowser-anim" style="image-rendering:pixelated">
+  <rect x="3" y="1" width="2" height="3" fill="#e8a020"/>
+  <rect x="7" y="0" width="2" height="3" fill="#e8a020"/>
+  <rect x="11" y="1" width="2" height="3" fill="#e8a020"/>
+  <rect x="3" y="3" width="10" height="5" fill="#5aad3a"/>
+  <rect x="5" y="4" width="2" height="2" fill="#ff3"/>
+  <rect x="9" y="4" width="2" height="2" fill="#ff3"/>
+  <rect x="6" y="4" width="1" height="1" fill="#111"/>
+  <rect x="10" y="4" width="1" height="1" fill="#111"/>
+  <rect x="4" y="3" width="3" height="1" fill="#e8a020"/>
+  <rect x="9" y="3" width="3" height="1" fill="#e8a020"/>
+  <rect x="5" y="7" width="6" height="2" fill="#fdd7a6"/>
+  <rect x="6" y="8" width="1" height="1" fill="#fff"/>
+  <rect x="8" y="8" width="1" height="1" fill="#fff"/>
+  <rect x="10" y="8" width="1" height="1" fill="#fff"/>
+  <rect x="3" y="9" width="10" height="4" fill="#5aad3a"/>
+  <rect x="4" y="10" width="8" height="2" fill="#e8a020"/>
+  <rect x="1" y="9" width="2" height="3" fill="#5aad3a"/>
+  <rect x="13" y="9" width="2" height="3" fill="#5aad3a"/>
+</svg>`,
+
+peach:`<svg width="48" height="48" viewBox="0 0 16 16" class="peach-anim" style="image-rendering:pixelated">
+  <rect x="5" y="0" width="1" height="2" fill="#ffd700"/>
+  <rect x="8" y="0" width="1" height="2" fill="#ffd700"/>
+  <rect x="11" y="0" width="1" height="2" fill="#ffd700"/>
+  <rect x="4" y="2" width="8" height="1" fill="#ffd700"/>
+  <rect x="5" y="1" width="1" height="1" fill="#e52222"/>
+  <rect x="8" y="1" width="1" height="1" fill="#3399ff"/>
+  <rect x="11" y="1" width="1" height="1" fill="#e52222"/>
+  <rect x="4" y="3" width="8" height="2" fill="#ffd700"/>
+  <rect x="3" y="4" width="2" height="3" fill="#ffd700"/>
+  <rect x="11" y="4" width="2" height="3" fill="#ffd700"/>
+  <rect x="5" y="4" width="6" height="4" fill="#fdd7a6"/>
+  <rect x="6" y="5" width="1" height="1" fill="#111"/>
+  <rect x="9" y="5" width="1" height="1" fill="#111"/>
+  <rect x="6" y="7" width="4" height="1" fill="#e88"/>
+  <rect x="5" y="6" width="1" height="1" fill="#ffb0c0"/>
+  <rect x="10" y="6" width="1" height="1" fill="#ffb0c0"/>
+  <rect x="3" y="8" width="10" height="6" fill="#ff88cc"/>
+  <rect x="4" y="9" width="8" height="1" fill="#cc5599"/>
+  <rect x="2" y="10" width="12" height="4" fill="#ff88cc"/>
+  <rect x="1" y="12" width="14" height="2" fill="#ffaadd"/>
+</svg>`,
+
+yoshi:`<svg width="48" height="48" viewBox="0 0 16 16" class="yoshi-anim" style="image-rendering:pixelated">
+  <rect x="4" y="2" width="8" height="5" fill="#3dbf5a"/>
+  <rect x="3" y="3" width="2" height="3" fill="#3dbf5a"/>
+  <rect x="9" y="1" width="4" height="3" fill="#3dbf5a"/>
+  <rect x="9" y="4" width="5" height="3" fill="#fdd7a6"/>
+  <rect x="13" y="5" width="2" height="1" fill="#fdd7a6"/>
+  <rect x="10" y="4" width="1" height="1" fill="#2a9a40"/>
+  <rect x="6" y="3" width="2" height="2" fill="#fff"/>
+  <rect x="7" y="3" width="1" height="1" fill="#111"/>
+  <rect x="4" y="7" width="8" height="5" fill="#3dbf5a"/>
+  <rect x="5" y="8" width="6" height="1" fill="#ffb0d0"/>
+  <rect x="3" y="7" width="3" height="4" fill="#e52222"/>
+  <rect x="2" y="8" width="2" height="2" fill="#e52222"/>
+  <rect x="5" y="12" width="3" height="2" fill="#3dbf5a"/>
+  <rect x="8" y="12" width="3" height="2" fill="#3dbf5a"/>
+  <rect x="4" y="13" width="4" height="1" fill="#fdd7a6"/>
+  <rect x="8" y="13" width="4" height="1" fill="#fdd7a6"/>
+  <rect x="14" y="6" width="2" height="1" fill="#ff4488"/>
+</svg>`,
+
+dk:`<svg width="48" height="48" viewBox="0 0 16 16" class="dk-anim" style="image-rendering:pixelated">
+  <rect x="3" y="2" width="10" height="6" fill="#5a3010"/>
+  <rect x="2" y="3" width="2" height="4" fill="#5a3010"/>
+  <rect x="12" y="3" width="2" height="4" fill="#5a3010"/>
+  <rect x="5" y="3" width="6" height="4" fill="#fba54c"/>
+  <rect x="5" y="3" width="2" height="2" fill="#fff"/>
+  <rect x="9" y="3" width="2" height="2" fill="#fff"/>
+  <rect x="6" y="3" width="1" height="1" fill="#111"/>
+  <rect x="10" y="3" width="1" height="1" fill="#111"/>
+  <rect x="7" y="5" width="1" height="1" fill="#e8935a"/>
+  <rect x="9" y="5" width="1" height="1" fill="#e8935a"/>
+  <rect x="6" y="6" width="5" height="1" fill="#5a3010"/>
+  <rect x="7" y="6" width="3" height="1" fill="#fff"/>
+  <rect x="6" y="8" width="4" height="5" fill="#e52222"/>
+  <rect x="7" y="9" width="2" height="3" fill="#cc0000"/>
+  <rect x="4" y="8" width="2" height="1" fill="#5a3010"/>
+  <rect x="10" y="8" width="2" height="1" fill="#5a3010"/>
+  <rect x="1" y="7" width="3" height="4" fill="#5a3010"/>
+  <rect x="12" y="7" width="3" height="4" fill="#5a3010"/>
+  <rect x="0" y="8" width="3" height="3" fill="#fba54c"/>
+  <rect x="13" y="8" width="3" height="3" fill="#fba54c"/>
+  <rect x="5" y="13" width="2" height="2" fill="#5a3010"/>
+  <rect x="9" y="13" width="2" height="2" fill="#5a3010"/>
+</svg>`
+};
+
+const levels=[
+  {n:"01",name:"Primer Trabajo",   tag:"HTML", tagClass:"tag-html",href:"tp-1/",            sprite:"mario",    game:"SUPER MARIO BROS"},
+  {n:"02",name:"Selectores CSS",   tag:"CSS",  tagClass:"tag-css", href:"tp-2/",            sprite:"sonic",    game:"SONIC THE HEDGEHOG"},
+  {n:"03",name:"Especificidad",    tag:"CSS",  tagClass:"tag-css", href:"tp-3/",            sprite:"scorpion", game:"MORTAL KOMBAT"},
+  {n:"04",name:"Media Queries",    tag:"CSS",  tagClass:"tag-css", href:"tp-4/",            sprite:"link",     game:"THE LEGEND OF ZELDA"},
+  {n:"05",name:"Bootstrap",        tag:"BOOT", tagClass:"tag-boot",href:"tp-5/",            sprite:"ryu",      game:"STREET FIGHTER II"},
+  {n:"06",name:"Grilla Bootstrap", tag:"BOOT", tagClass:"tag-boot",href:"tp-6/",            sprite:"pacman",   game:"PAC-MAN"},
+  {n:"07",name:"Bootstrap (2)",    tag:"BOOT", tagClass:"tag-boot",href:"tp-7/",            sprite:"snake",    game:"METAL GEAR SOLID"},
+  {n:"08",name:"Funciones JS",     tag:"JS",   tagClass:"tag-js",  href:"tp-8/",            sprite:"samus",    game:"METROID"},
+  {n:"09",name:"Listas JS",        tag:"JS",   tagClass:"tag-js",  href:"tp-9/",            sprite:"cloud",    game:"FINAL FANTASY VII"},
+  {n:"10",name:"Objetos JS",       tag:"JS",   tagClass:"tag-js",  href:"tp-10/",           sprite:"ghost",    game:"SUPER MARIO (BOO)"},
+  {n:"11",name:"Listas y Objetos", tag:"JS",   tagClass:"tag-js",  href:"tp-11/",           sprite:"kirby",    game:"KIRBY'S DREAM LAND"},
+  {n:"12",name:"Trabajo 12",       tag:"JS",   tagClass:"tag-js",  href:"/tp-12/index.html",sprite:"toad",     game:"SUPER MARIO WORLD"},
+  {n:"13",name:"Trabajo 13",       tag:"JS",   tagClass:"tag-js",  href:"/tp-13/index.html",sprite:"bowser",   game:"BOWSER'S FURY"},
+  {n:"14",name:"Trabajo 14",       tag:"JS",   tagClass:"tag-js",  href:"/tp-14/index.html",sprite:"peach",    game:"SUPER PRINCESS PEACH"},
+  {n:"15",name:"Trabajo 15",       tag:"JS",   tagClass:"tag-js",  href:"/tp-15/index.html",sprite:"yoshi",    game:"YOSHI'S ISLAND"},
+  {n:"16",name:"Trabajo 16",       tag:"PHP",  tagClass:"tag-php", href:"/tp-16/index.html",sprite:"dk",       game:"DONKEY KONG"},
+];
+
+const container=document.getElementById('levels');
+levels.forEach((lvl,i)=>{
+  const a=document.createElement('a');
+  a.className='level-item';
+  a.href='#';
+  a.dataset.href=lvl.href;
+  a.dataset.game=lvl.game;
+  if(i===0) a.style.borderRadius='6px 6px 0 0';
+  if(i===levels.length-1){a.style.borderRadius='0 0 6px 6px';a.style.borderBottom='2px solid var(--border)';}
+  a.innerHTML=`
+    <div class="sprite-wrap">${sprites[lvl.sprite]||''}</div>
+    <div class="level-info">
+      <div class="level-num">STAGE ${lvl.n} · ${lvl.game}</div>
+      <div class="level-name">${lvl.name.toUpperCase()}</div>
+      <span class="level-tag ${lvl.tagClass}">${lvl.tag}</span>
+    </div>
+    <div class="arrow">▶ START</div>`;
+  container.appendChild(a);
+  if(i<levels.length-1){
+    const hr=document.createElement('div');
+    hr.style.cssText='max-width:800px;margin:0 auto;height:2px;background:repeating-linear-gradient(90deg,var(--border) 0 6px,transparent 6px 10px);';
+    container.appendChild(hr);
+  }
+});
+
+/* LOADING SCREEN */
+const overlay=document.getElementById('loading-overlay');
+const loadBar=document.getElementById('load-bar');
+const loadGame=document.getElementById('load-game-name');
+const loadPct=document.getElementById('load-pct');
+
+function showLoading(href,gameName){
+  loadGame.textContent=gameName;
+  loadBar.style.width='0%';
+  loadPct.textContent='0%';
+  overlay.classList.remove('hidden','gone');
+  document.body.style.overflow='hidden';
+
+  const steps=[
+    {to:22,ms:80},{to:45,ms:100},{to:58,ms:60},
+    {to:74,ms:90},{to:88,ms:70},{to:95,ms:120},{to:100,ms:80}
+  ];
+  let si=0;
+  function run(){
+    if(si>=steps.length){
+      setTimeout(()=>{ window.location.href=href; },150);
+      return;
+    }
+    const s=steps[si++];
+    setTimeout(()=>{
+      loadBar.style.width=s.to+'%';
+      loadPct.textContent=s.to+'%';
+      run();
+    },s.ms);
+  }
+  run();
+}
+
+document.querySelectorAll('.level-item').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    showLoading(a.dataset.href,a.dataset.game);
+  });
+});
+</script>
+</body>
 </html>
