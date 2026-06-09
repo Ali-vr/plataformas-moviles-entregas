@@ -63,9 +63,9 @@
 
     </nav>
 
-    <!-- CAROUSEL -->
-
-    <div id="carouselExample" class="carousel slide">
+<!-- CAROUSEL -->
+    
+<div id="carouselExample" class="carousel slide d-none d-md-block">
 
         <div class="carousel-inner">
 
@@ -354,54 +354,50 @@
 </div>
 
 <!-- FORMULARIO -->
-
 <div class="container mt-5 mb-5">
-
     <div class="card p-4">
 
         <form>
 
             <!-- NOMBRE -->
-
-            <div class="mb-3">
-
-                <label class="form-label">
-                    Nombre
-                </label>
-
-                <input type="text"
-                       class="form-control"
-                       placeholder="Ingrese su nombre">
-
+            <div class="row mb-3">
+                <label class="col-12 col-md-3 col-form-label">Nombre</label>
+                <div class="col-12 col-md-9">
+                    <input type="text" class="form-control"
+                           placeholder="Ingrese su nombre">
+                </div>
             </div>
 
             <!-- GMAIL -->
-
-            <div class="mb-3">
-
-                <label class="form-label">
-                    Gmail
-                </label>
-
-                <input type="email"
-                       class="form-control"
-                       placeholder="Ingrese su gmail">
-
+            <div class="row mb-3">
+                <label class="col-12 col-md-3 col-form-label">Gmail</label>
+                <div class="col-12 col-md-9">
+                    <input type="email" class="form-control"
+                           placeholder="Ingrese su gmail">
+                </div>
             </div>
 
             <!-- COMENTARIO -->
-
-            <div class="mb-3">
-
-                <label class="form-label">
-                    Comentario
-                </label>
-
-                <textarea class="form-control"
-                          rows="4"
-                          placeholder="Escriba un comentario"></textarea>
-
+            <div class="row mb-3">
+                <label class="col-12 col-md-3 col-form-label">Comentario</label>
+                <div class="col-12 col-md-9">
+                    <textarea class="form-control" rows="4"
+                              placeholder="Escriba un comentario"></textarea>
+                </div>
             </div>
+
+            <!-- BOTONES -->
+            <div class="row">
+                <div class="col-12 col-md-9 offset-md-3">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button type="reset" class="btn btn-secondary">Limpiar</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
 
             <!-- BOTONES -->
 
@@ -426,26 +422,19 @@
 </div>
 
 <!-- FOOTER NAVBAR -->
+<nav class="navbar navbar-dark bg-dark w-100">
+    <div class="container-fluid">
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <span class="navbar-brand">
+            Plataformas Móviles
+        </span>
 
-        <div class="container">
+        <span class="navbar-text text-white">
+            Ali Vergara
+        </span>
 
-            <a class="navbar-brand" href="#">
-                Plataformas moviles
-            </a>
-
-<div class="collapse navbar-collapse">
-
-                <ul class="navbar-nav ms-auto">
-
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                            Ali Vergara
-                        </a>
-                    </li>
-</ul>
-</div>
+    </div>
+</nav>
         
     <script src="js/bootstrap.bundle.min.js"></script>
 
