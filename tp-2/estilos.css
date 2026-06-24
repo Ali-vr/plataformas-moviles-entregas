@@ -48,7 +48,17 @@ strong {
 }
 
 /* 9. Padding-left  */
-#episodio_pre {
+#episodio_pre1 {
+    padding-left: 40px;   
+}
+
+/* 9. Padding-left  */
+#episodio_pre2 {
+    padding-left: 40px;   
+}
+
+/* 9. Padding-left  */
+#episodio_pre3 {
     padding-left: 40px;   
 }
 
