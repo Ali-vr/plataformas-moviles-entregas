@@ -1,0 +1,504 @@
+## `tp-15/index.html`
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tablero de Puntos - DOM y JavaScript</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT"
+          crossorigin="anonymous">
+</head>
+
+<body>
+
+    <div class="container my-1 my-sm-2 my-md-4 my-lg-5">
+
+        <h1>Tablero de Puntos</h1>
+
+        <div class="card">
+            <div class="card-body">
+
+                <!-- Nombres de los equipos -->
+                <div class="row text-center">
+                    <div class="col-5">
+                        <span id="puntaje-local" class="display-1">0</span>
+                        <p id="nombre-local" class="m-0">Local</p>
+                    </div>
+
+                    <div class="col-2">
+                        <span class="display-1">:</span>
+                    </div>
+
+                    <div class="col-5">
+                        <span id="puntaje-visitante" class="display-1">0</span>
+                        <p id="nombre-visitante" class="m-0">Visitante</p>
+                    </div>
+                </div>
+
+                <hr class="hr">
+
+                <h2>Actualizar Contador</h2>
+
+                <div class="row">
+
+                    <!-- Punto Local -->
+                    <div class="col-12 col-sm-4 my-1">
+                        <button id="btn-punto-local"
+                                class="btn d-block w-100 btn-primary">
+                            Punto Local
+                        </button>
+                    </div>
+
+                    <!-- Punto Visitante -->
+                    <div class="col-12 col-sm-4 my-1">
+                        <button id="btn-punto-visitante"
+                                class="btn d-block w-100 btn-primary">
+                            Punto Visitante
+                        </button>
+                    </div>
+
+                    <!-- Reinicio -->
+                    <div class="col-12 col-sm-4 my-1">
+                        <button id="btn-reinicio"
+                                class="btn d-block w-100 btn-danger">
+                            Reinicio
+                        </button>
+                    </div>
+
+                </div>
+
+                <hr class="hr">
+
+                <h2>Modificar Puntaje</h2>
+
+                <div class="row">
+
+                    <!-- Local + -->
+                    <div class="col-12 col-sm-3 my-1">
+                        <button id="btn-sumar-local"
+                                class="btn d-block w-100 btn-success">
+                            + Local
+                        </button>
+                    </div>
+
+                    <!-- Local - -->
+                    <div class="col-12 col-sm-3 my-1">
+                        <button id="btn-restar-local"
+                                class="btn d-block w-100 btn-warning">
+                            - Local
+                        </button>
+                    </div>
+
+                    <!-- Visitante + -->
+                    <div class="col-12 col-sm-3 my-1">
+                        <button id="btn-sumar-visitante"
+                                class="btn d-block w-100 btn-success">
+                            + Visitante
+                        </button>
+                    </div>
+
+                    <!-- Visitante - -->
+                    <div class="col-12 col-sm-3 my-1">
+                        <button id="btn-restar-visitante"
+                                class="btn d-block w-100 btn-warning">
+                            - Visitante
+                        </button>
+                    </div>
+
+                </div>
+
+                <div class="row mt-2">
+
+                    <!-- Invertir -->
+                    <div class="col-12 col-sm-6 my-1">
+                        <button id="btn-invertir"
+                                class="btn d-block w-100 btn-secondary">
+                            Invertir Puntaje
+                        </button>
+                    </div>
+
+                    <!-- Finalizar -->
+                    <div class="col-12 col-sm-6 my-1">
+                        <button id="btn-finalizar"
+                                class="btn d-block w-100 btn-dark">
+                            Finalizar Partido
+                        </button>
+                    </div>
+
+                </div>
+
+                <hr class="hr">
+
+                <!-- BONUS: cambiar nombres -->
+                <h2>Bonus: Equipos</h2>
+
+                <div class="row">
+
+                    <div class="col-12 col-sm-6 my-1">
+                        <input id="input-nombre-local"
+                               class="form-control"
+                               type="text"
+                               placeholder="Nombre del equipo local">
+                    </div>
+
+                    <div class="col-12 col-sm-6 my-1">
+                        <input id="input-nombre-visitante"
+                               class="form-control"
+                               type="text"
+                               placeholder="Nombre del equipo visitante">
+                    </div>
+
+                    <div class="col-12 my-1">
+                        <button id="btn-cambiar-nombres"
+                                class="btn btn-primary w-100">
+                            Cambiar nombres
+                        </button>
+                    </div>
+
+                </div>
+
+                <!-- BONUS: colores -->
+                <h2 class="mt-3">Bonus: Colores</h2>
+
+                <div class="row">
+
+                    <div class="col-12 col-sm-4 my-1">
+                        <label for="color-fondo">Color de fondo</label>
+                        <input id="color-fondo"
+                               class="form-control"
+                               type="color"
+                               value="#ffffff">
+                    </div>
+
+                    <div class="col-12 col-sm-4 my-1">
+                        <label for="color-local">Color Local</label>
+                        <input id="color-local"
+                               class="form-control"
+                               type="color"
+                               value="#0000ff">
+                    </div>
+
+                    <div class="col-12 col-sm-4 my-1">
+                        <label for="color-visitante">Color Visitante</label>
+                        <input id="color-visitante"
+                               class="form-control"
+                               type="color"
+                               value="#ff0000">
+                    </div>
+
+                </div>
+
+                <!-- BONUS: atajos -->
+                <h2 class="mt-3">Bonus: Atajos de teclado</h2>
+
+                <p>
+                    Teclas:
+                    <strong>A</strong> + Local,
+                    <strong>Z</strong> - Local,
+                    <strong>K</strong> + Visitante,
+                    <strong>M</strong> - Visitante,
+                    <strong>R</strong> Reinicio,
+                    <strong>I</strong> Invertir.
+                </p>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        // Puntajes iniciales
+        let puntajeLocal = 0;
+        let puntajeVisitante = 0;
+
+        // Elementos del DOM
+        let mostrarPuntajeLocal = document.querySelector("#puntaje-local");
+        let mostrarPuntajeVisitante = document.querySelector("#puntaje-visitante");
+
+        let nombreLocal = document.querySelector("#nombre-local");
+        let nombreVisitante = document.querySelector("#nombre-visitante");
+
+        // Botones principales
+        let btnPuntoLocal = document.querySelector("#btn-punto-local");
+        let btnPuntoVisitante = document.querySelector("#btn-punto-visitante");
+        let btnReinicio = document.querySelector("#btn-reinicio");
+
+        // Botones para sumar y restar
+        let btnSumarLocal = document.querySelector("#btn-sumar-local");
+        let btnRestarLocal = document.querySelector("#btn-restar-local");
+
+        let btnSumarVisitante = document.querySelector("#btn-sumar-visitante");
+        let btnRestarVisitante = document.querySelector("#btn-restar-visitante");
+
+        // Otros botones
+        let btnInvertir = document.querySelector("#btn-invertir");
+        let btnFinalizar = document.querySelector("#btn-finalizar");
+
+        // Bonus: nombres
+        let inputNombreLocal = document.querySelector("#input-nombre-local");
+        let inputNombreVisitante = document.querySelector("#input-nombre-visitante");
+        let btnCambiarNombres = document.querySelector("#btn-cambiar-nombres");
+
+        // Bonus: colores
+        let colorFondo = document.querySelector("#color-fondo");
+        let colorLocal = document.querySelector("#color-local");
+        let colorVisitante = document.querySelector("#color-visitante");
+
+        // --------------------------------------------------
+        // ACTUALIZAR PUNTAJE
+        // --------------------------------------------------
+
+        function actualizarPuntaje() {
+
+            mostrarPuntajeLocal.innerText = puntajeLocal;
+            mostrarPuntajeVisitante.innerText = puntajeVisitante;
+
+        }
+
+        // --------------------------------------------------
+        // SUMAR PUNTO LOCAL
+        // --------------------------------------------------
+
+        function sumarPuntoLocal() {
+
+            puntajeLocal = puntajeLocal + 1;
+
+            actualizarPuntaje();
+
+        }
+
+        // --------------------------------------------------
+        // SUMAR PUNTO VISITANTE
+        // --------------------------------------------------
+
+        function sumarPuntoVisitante() {
+
+            puntajeVisitante = puntajeVisitante + 1;
+
+            actualizarPuntaje();
+
+        }
+
+        // --------------------------------------------------
+        // RESTAR PUNTO LOCAL
+        // --------------------------------------------------
+
+        function restarPuntoLocal() {
+
+            if (puntajeLocal > 0) {
+
+                puntajeLocal = puntajeLocal - 1;
+
+                actualizarPuntaje();
+
+            }
+
+        }
+
+        // --------------------------------------------------
+        // RESTAR PUNTO VISITANTE
+        // --------------------------------------------------
+
+        function restarPuntoVisitante() {
+
+            if (puntajeVisitante > 0) {
+
+                puntajeVisitante = puntajeVisitante - 1;
+
+                actualizarPuntaje();
+
+            }
+
+        }
+
+        // --------------------------------------------------
+        // REINICIAR
+        // --------------------------------------------------
+
+        function reiniciar() {
+
+            puntajeLocal = 0;
+            puntajeVisitante = 0;
+
+            actualizarPuntaje();
+
+            // Volvemos a habilitar los botones
+            btnPuntoLocal.disabled = false;
+            btnPuntoVisitante.disabled = false;
+
+            btnSumarLocal.disabled = false;
+            btnRestarLocal.disabled = false;
+
+            btnSumarVisitante.disabled = false;
+            btnRestarVisitante.disabled = false;
+
+            btnInvertir.disabled = false;
+            btnFinalizar.disabled = false;
+
+        }
+
+        // --------------------------------------------------
+        // INVERTIR PUNTAJE
+        // --------------------------------------------------
+
+        function invertirPuntaje() {
+
+            let puntajeTemporal = puntajeLocal;
+
+            puntajeLocal = puntajeVisitante;
+            puntajeVisitante = puntajeTemporal;
+
+            actualizarPuntaje();
+
+        }
+
+        // --------------------------------------------------
+        // FINALIZAR PARTIDO
+        // --------------------------------------------------
+
+        function finalizarPartido() {
+
+            btnPuntoLocal.disabled = true;
+            btnPuntoVisitante.disabled = true;
+
+            btnSumarLocal.disabled = true;
+            btnRestarLocal.disabled = true;
+
+            btnSumarVisitante.disabled = true;
+            btnRestarVisitante.disabled = true;
+
+            btnInvertir.disabled = true;
+
+        }
+
+        // --------------------------------------------------
+        // EVENTOS DE LOS BOTONES
+        // --------------------------------------------------
+
+        btnPuntoLocal.addEventListener("click", sumarPuntoLocal);
+
+        btnPuntoVisitante.addEventListener("click", sumarPuntoVisitante);
+
+        btnSumarLocal.addEventListener("click", sumarPuntoLocal);
+
+        btnRestarLocal.addEventListener("click", restarPuntoLocal);
+
+        btnSumarVisitante.addEventListener("click", sumarPuntoVisitante);
+
+        btnRestarVisitante.addEventListener("click", restarPuntoVisitante);
+
+        btnReinicio.addEventListener("click", reiniciar);
+
+        btnInvertir.addEventListener("click", invertirPuntaje);
+
+        btnFinalizar.addEventListener("click", finalizarPartido);
+
+
+        // ==================================================
+        // BONUS 1: CAMBIAR NOMBRES
+        // ==================================================
+
+        btnCambiarNombres.addEventListener("click", function() {
+
+            let nuevoNombreLocal = inputNombreLocal.value;
+            let nuevoNombreVisitante = inputNombreVisitante.value;
+
+            if (nuevoNombreLocal != "") {
+
+                nombreLocal.innerText = nuevoNombreLocal;
+
+            }
+
+            if (nuevoNombreVisitante != "") {
+
+                nombreVisitante.innerText = nuevoNombreVisitante;
+
+            }
+
+        });
+
+
+        // ==================================================
+        // BONUS 2: CAMBIAR COLORES
+        // ==================================================
+
+        colorFondo.addEventListener("input", function() {
+
+            document.body.style.backgroundColor = colorFondo.value;
+
+        });
+
+        colorLocal.addEventListener("input", function() {
+
+            mostrarPuntajeLocal.style.color = colorLocal.value;
+            nombreLocal.style.color = colorLocal.value;
+
+        });
+
+        colorVisitante.addEventListener("input", function() {
+
+            mostrarPuntajeVisitante.style.color = colorVisitante.value;
+            nombreVisitante.style.color = colorVisitante.value;
+
+        });
+
+
+        // ==================================================
+        // BONUS 3: ATAJOS DE TECLADO
+        // ==================================================
+
+        document.addEventListener("keydown", function(evento) {
+
+            if (evento.key == "a" || evento.key == "A") {
+
+                sumarPuntoLocal();
+
+            }
+
+            if (evento.key == "z" || evento.key == "Z") {
+
+                restarPuntoLocal();
+
+            }
+
+            if (evento.key == "k" || evento.key == "K") {
+
+                sumarPuntoVisitante();
+
+            }
+
+            if (evento.key == "m" || evento.key == "M") {
+
+                restarPuntoVisitante();
+
+            }
+
+            if (evento.key == "r" || evento.key == "R") {
+
+                reiniciar();
+
+            }
+
+            if (evento.key == "i" || evento.key == "I") {
+
+                invertirPuntaje();
+
+            }
+
+        });
+
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+            crossorigin="anonymous">
+    </script>
+
+</body>
+</html>
+```
