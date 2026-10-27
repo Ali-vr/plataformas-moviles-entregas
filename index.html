@@ -148,7 +148,7 @@ const bt=barTex();BAR.forEach(([x,y])=>SPR.push({x,y,tex:bt,sz:.7,r:.3}));
 const cv=$('v'),ctx=cv.getContext('2d'),VW=320,VH=200,zb=new Float32Array(VW);
 let VIS=new Set();try{VIS=new Set(JSON.parse(localStorage.getItem(KEY)||'[]').filter(n=>n>=1&&n<=TOTAL))}catch(e){}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify([...VIS]))}catch(e){}};
-let px=24.5,py=16.5,ang=-Math.PI/2,st='title',panelTp=null,showMap=true,noLock=false,reqClick=false,drag=false,t0=0,bob=0;
+let navTimer,px=24.5,py=16.5,ang=-Math.PI/2,st='title',panelTp=null,showMap=true,noLock=false,reqClick=false,drag=false,t0=0,bob=0;
 const K={},DO=new Map(),pad=n=>String(n).padStart(2,'0');
 const doorOpen=(x,y)=>DO.get(y*W+x)||0;
 function hud(){$('cnt').textContent=`TPs ${pad(VIS.size)} / ${TOTAL}`;$('tcnt').textContent=`${pad(VIS.size)} / ${TOTAL}`;TSP.forEach(s=>s.tex=termTex(s.tp.id,VIS.has(s.tp.id)))}
@@ -219,7 +219,7 @@ function openPanel(){const t=nearTp();if(!t)return;panelTp=t;for(const k in K)K[
  $('panel').style.display='flex';$('pGo').focus();beep(440,.08)}
 function closePanel(byClick){panelTp=null;$('panel').style.display='none';if(st==='play')lock(byClick)}
 function go(t){if(st!=='play')return;st='leaving';VIS.add(t.id);save();hud();beep(220,.25,'sawtooth');
- $('panel').style.display='none';$('fade').classList.add('on');setTimeout(()=>{window.location.href=t.href},450)}
+ $('panel').style.display='none';$('fade').classList.add('on');navTimer=setTimeout(()=>{window.location.href=t.href},450)}
 function start(){st='play';$('title').style.display='none';ang=-Math.PI/2;px=24.5;py=16.5;lock(true);beep(160,.2,'sawtooth')}
 
 addEventListener('keydown',e=>{K[e.code]=1;
@@ -252,8 +252,17 @@ function loop(ts){const t=ts/1000,dt=Math.min(.05,t-t0||.016);t0=t;
  else $('sec').textContent='SALA INICIAL';
  if(showMap)drawMini();
  requestAnimationFrame(loop)}
+// Al volver con "atrás" el navegador puede restaurar la página tal como quedó (bfcache):
+// con el fundido en negro y el estado "leaving". Se restablece todo para seguir jugando.
+addEventListener('pageshow',e=>{
+ if(!e.persisted&&st!=='leaving')return;
+ clearTimeout(navTimer);$('fade').classList.remove('on');for(const k in K)K[k]=0;
+ try{VIS=new Set(JSON.parse(localStorage.getItem(KEY)||'[]').filter(n=>n>=1&&n<=TOTAL))}catch(err){}
+ hud();panelTp=null;$('panel').style.display='none';
+ if(st==='leaving'||st==='play'){st='play';$('title').style.display='none';$('pause').style.display='flex'}});
 hud();requestAnimationFrame(loop);
 })();
 </script>
 </body>
+</html>
 </html>
