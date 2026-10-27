@@ -1,0 +1,15 @@
+
+.imagen-pokemon {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    margin: 10px auto;
+}
+
+.card {
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
