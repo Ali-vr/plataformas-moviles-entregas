@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#040506">
+    <meta name="description" content="Explorá videojuegos gratuitos y consultá sus datos en JSON.">
+    <title>GameZone — Explorador de videojuegos</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/api.js" defer></script>
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar">
+            <a class="logo" href="#" aria-label="GameZone, inicio">
+                <span class="logo-mark">◆</span>
+                GameZone
+            </a>
+
+            <div class="nav-links">
+                <a href="#catalog">Catálogo</a>
+                <a href="#json-explorer">Explorador JSON</a>
+            </div>
+
+            <span class="api-status">
+                <span class="status-dot"></span>
+                API externa
+            </span>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-glow"></div>
+
+            <div class="hero-content">
+                <span class="eyebrow">
+                    <span class="eyebrow-dot"></span>
+                    VIDEO GAME DATABASE
+                </span>
+
+                <h1>Tu próximo juego<br>está <span>por descubrir.</span></h1>
+
+                <p>
+                    Explorá videojuegos gratuitos, descubrí sus características
+                    y consultá los datos que devuelve la API en tiempo real.
+                </p>
+
+                <div class="hero-actions">
+                    <a class="button button-primary" href="#catalog">
+                        Explorar catálogo <span aria-hidden="true">↘</span>
+                    </a>
+                    <a class="button button-ghost" href="#json-explorer">
+                        Ver datos JSON
+                    </a>
+                </div>
+
+                <div class="hero-meta">
+                    <span>FREE TO PLAY</span>
+                    <span class="meta-divider">|</span>
+                    <span>DATOS DINÁMICOS</span>
+                    <span class="meta-divider">|</span>
+                    <span>JSON EXPLORER</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="content-section" id="catalog">
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">01 / EXPLORACIÓN</span>
+                    <h2>Catálogo de juegos</h2>
+                    <p>Buscá, filtrá y encontrá tu próxima aventura.</p>
+                </div>
+
+                <button id="jsonButton" class="button button-secondary" type="button">
+                    <span aria-hidden="true">{ }</span> Ver JSON general
+                </button>
+            </div>
+
+            <div class="filter-panel">
+                <div class="search-field">
+                    <label for="search">Buscar juego</label>
+                    <div class="input-wrap">
+                        <span aria-hidden="true">⌕</span>
+                        <input
+                            id="search"
+                            type="search"
+                            placeholder="Nombre del videojuego..."
+                        >
+                    </div>
+                </div>
+
+                <div class="filter-field">
+                    <label for="genre">Género</label>
+                    <select id="genre">
+                        <option value="">Todos los géneros</option>
+                        <option value="mmorpg">MMORPG</option>
+                        <option value="shooter">Shooter</option>
+                        <option value="strategy">Estrategia</option>
+                        <option value="moba">MOBA</option>
+                        <option value="racing">Carreras</option>
+                        <option value="sports">Deportes</option>
+                        <option value="social">Social</option>
+                        <option value="sandbox">Sandbox</option>
+                        <option value="fighting">Lucha</option>
+                        <option value="action-rpg">Action RPG</option>
+                        <option value="battle-royale">Battle Royale</option>
+                    </select>
+                </div>
+
+                <div class="filter-field">
+                    <label for="platform">Plataforma</label>
+                    <select id="platform">
+                        <option value="">Todas</option>
+                        <option value="pc">PC</option>
+                        <option value="browser">Navegador</option>
+                    </select>
+                </div>
+
+                <button id="searchButton" class="button button-primary search-button" type="button">
+                    Buscar
+                </button>
+
+                <button id="clearButton" class="button button-ghost clear-button" type="button">
+                    Limpiar
+                </button>
+            </div>
+
+            <div class="catalog-toolbar">
+                <p id="status" role="status" aria-live="polite">
+                    Conectando con la API...
+                </p>
+
+                <span class="toolbar-tag">FREE TO PLAY</span>
+            </div>
+
+            <div id="games" class="games-grid"></div>
+
+            <div id="pagination" class="pagination" hidden>
+                <button id="prevPage" class="button button-secondary" type="button">
+                    ← Anterior
+                </button>
+                <span id="pageInfo"></span>
+                <button id="nextPage" class="button button-secondary" type="button">
+                    Siguiente →
+                </button>
+            </div>
+
+            <section id="gameDetails" class="details-section" hidden>
+                <div class="section-heading details-heading">
+                    <div>
+                        <span class="section-label">02 / INFORMACIÓN DEL JUEGO</span>
+                        <h2>Detalles del videojuego</h2>
+                    </div>
+
+                    <button id="closeDetails" class="button button-secondary" type="button">
+                        ← Volver al catálogo
+                    </button>
+                </div>
+
+                <div id="detailsContent"></div>
+
+                <div class="json-panel game-json-panel">
+                    <div class="json-panel-header">
+                        <div>
+                            <span class="section-label">RAW RESPONSE</span>
+                            <h3>JSON del videojuego</h3>
+                            <p>Respuesta completa de la consulta individual.</p>
+                        </div>
+
+                        <button id="copyGameJson" class="button button-secondary" type="button">
+                            Copiar JSON
+                        </button>
+                    </div>
+
+                    <div class="json-toolbar">
+                        <span class="json-file"><span>●</span> game-response.json</span>
+                        <span id="gameJsonCount">Esperando datos...</span>
+                    </div>
+
+                    <pre id="gameJsonOutput" class="json-code" tabindex="0"></pre>
+                </div>
+            </section>
+        </section>
+
+        <section id="json-explorer" class="content-section json-explorer-section">
+            <div class="section-heading">
+                <div>
+                    <span class="section-label">03 / INSPECCIÓN DE DATOS</span>
+                    <h2>Explorador JSON</h2>
+                    <p>Inspeccioná la respuesta real que devuelve la API.</p>
+                </div>
+            </div>
+
+            <div class="json-panel">
+                <div class="json-panel-header">
+                    <div>
+                        <span class="section-label">API RESPONSE</span>
+                        <h3>Respuesta general</h3>
+                        <p>Datos originales de los videojuegos cargados.</p>
+                    </div>
+
+                    <div class="json-actions">
+                        <button id="refreshJson" class="button button-secondary" type="button">
+                            Actualizar
+                        </button>
+                        <button id="copyJson" class="button button-primary" type="button">
+                            Copiar JSON
+                        </button>
+                    </div>
+                </div>
+
+                <div class="json-toolbar">
+                    <span class="json-file"><span>●</span> games-response.json</span>
+                    <span id="jsonCount">Esperando datos...</span>
+                </div>
+
+                <pre id="jsonOutput" class="json-code" tabindex="0"></pre>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <a class="logo footer-logo" href="#">
+            <span class="logo-mark">◆</span> GameZone
+        </a>
+        <p>Explorador de videojuegos · Datos de FreeToGame API</p>
+        <span class="footer-version">HTML · CSS · JAVASCRIPT · JSON</span>
+    </footer>
+</body>
+</html>
