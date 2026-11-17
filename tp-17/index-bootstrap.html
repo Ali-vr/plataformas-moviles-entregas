@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f7fb">
+    <meta name="description" content="Explorá videojuegos gratuitos con GameZone.">
+    <title>GameZone — Versión Bootstrap</title>
+    <link rel="stylesheet" href="css_boostrap/bootstrap.min.css">
+    <link rel="stylesheet" href="css_boostrap/app-bootstrap.css">
+    <script src="js_boostrap/bootstrap.bundle.min.js" defer></script>
+    <script src="js_boostrap/api.js" defer></script>
+    <script src="js_boostrap/app.js" defer></script>
+</head>
+<body class="bootstrap-page">
+    <header class="site-header bg-white border-bottom sticky-top">
+        <nav class="container navbar navbar-expand-md py-3">
+            <a class="navbar-brand fw-bold text-primary" href="index-bootstrap.html">◆ GameZone</a>
+            <div class="navbar-nav ms-auto flex-row gap-3">
+                <a class="nav-link" href="#catalog">Catálogo</a>
+                <a class="nav-link" href="#json-explorer">Explorador JSON</a>
+                <a class="nav-link fw-semibold" href="opciones.html">Elegir diseño</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="bootstrap-hero py-5">
+            <div class="container py-lg-5 text-center">
+                <span class="badge text-bg-primary mb-3">VIDEO GAME DATABASE</span>
+                <h1 class="display-4 fw-bold">Tu próximo juego<br>está por descubrir.</h1>
+                <p class="lead text-secondary mx-auto mt-3">
+                    Explorá videojuegos gratuitos, descubrí sus características
+                    y consultá los datos que devuelve la API en tiempo real.
+                </p>
+                <div class="d-flex flex-wrap justify-content-center gap-2 mt-4">
+                    <a class="btn btn-primary btn-lg" href="#catalog">Explorar catálogo</a>
+                    <a class="btn btn-outline-primary btn-lg" href="#json-explorer">Ver datos JSON</a>
+                </div>
+                <p class="small text-secondary mt-4 mb-0">FREE TO PLAY · DATOS DINÁMICOS · JSON EXPLORER</p>
+            </div>
+        </section>
+
+        <section class="container py-5" id="catalog">
+            <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-4">
+                <div>
+                    <p class="section-label mb-1">01 / EXPLORACIÓN</p>
+                    <h2 class="h1 mb-2">Catálogo de juegos</h2>
+                    <p class="text-secondary mb-0">Buscá, filtrá y encontrá tu próxima aventura.</p>
+                </div>
+                <button id="jsonButton" class="btn btn-outline-primary" type="button">Ver JSON general</button>
+            </div>
+
+            <div class="card shadow-sm border-0 filter-panel">
+                <div class="card-body">
+                    <div class="row g-3 align-items-end">
+                        <div class="col-12 col-lg-4">
+                            <label class="form-label" for="search">Buscar juego</label>
+                            <input id="search" class="form-control" type="search" placeholder="Nombre del videojuego...">
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-3">
+                            <label class="form-label" for="genre">Género</label>
+                            <select id="genre" class="form-select">
+                                <option value="">Todos los géneros</option>
+                                <option value="mmorpg">MMORPG</option>
+                                <option value="shooter">Shooter</option>
+                                <option value="strategy">Estrategia</option>
+                                <option value="moba">MOBA</option>
+                                <option value="racing">Carreras</option>
+                                <option value="sports">Deportes</option>
+                                <option value="social">Social</option>
+                                <option value="sandbox">Sandbox</option>
+                                <option value="fighting">Lucha</option>
+                                <option value="action-rpg">Action RPG</option>
+                                <option value="battle-royale">Battle Royale</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 col-lg-2">
+                            <label class="form-label" for="platform">Plataforma</label>
+                            <select id="platform" class="form-select">
+                                <option value="">Todas</option>
+                                <option value="pc">PC</option>
+                                <option value="browser">Navegador</option>
+                            </select>
+                        </div>
+                        <div class="col-6 col-lg-1">
+                            <button id="searchButton" class="btn btn-primary w-100" type="button">Buscar</button>
+                        </div>
+                        <div class="col-6 col-lg-2">
+                            <button id="clearButton" class="btn btn-outline-secondary w-100" type="button">Limpiar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between align-items-center gap-3 my-4">
+                <p id="status" class="text-secondary mb-0" role="status" aria-live="polite">Conectando con la API...</p>
+                <span class="badge text-bg-light border">FREE TO PLAY</span>
+            </div>
+
+            <div id="games" class="games-grid row g-4"></div>
+
+            <div id="pagination" class="pagination d-flex align-items-center justify-content-center gap-3 mt-4" hidden>
+                <button id="prevPage" class="btn btn-outline-primary" type="button">← Anterior</button>
+                <span id="pageInfo" class="text-secondary"></span>
+                <button id="nextPage" class="btn btn-outline-primary" type="button">Siguiente →</button>
+            </div>
+
+            <section id="gameDetails" class="details-section mt-5 pt-4 border-top" hidden>
+                <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+                    <div>
+                        <p class="section-label mb-1">02 / INFORMACIÓN DEL JUEGO</p>
+                        <h2 class="h2 mb-0">Detalles del videojuego</h2>
+                    </div>
+                    <button id="closeDetails" class="btn btn-outline-primary" type="button">← Volver al catálogo</button>
+                </div>
+                <div id="detailsContent"></div>
+                <div class="card json-panel mt-4">
+                    <div class="card-body">
+                        <div class="json-panel-header d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+                            <div>
+                                <p class="section-label mb-1">RAW RESPONSE</p>
+                                <h3 class="h5 mb-1">JSON del videojuego</h3>
+                                <p class="text-secondary mb-0">Respuesta completa de la consulta individual.</p>
+                            </div>
+                            <button id="copyGameJson" class="btn btn-outline-primary" type="button">Copiar JSON</button>
+                        </div>
+                        <div class="json-toolbar d-flex justify-content-between gap-3 border-top border-bottom py-2 small text-secondary">
+                            <span class="json-file">● game-response.json</span>
+                            <span id="gameJsonCount">Esperando datos...</span>
+                        </div>
+                        <pre id="gameJsonOutput" class="json-code mt-3" tabindex="0"></pre>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <section id="json-explorer" class="container py-5">
+            <div class="mb-4">
+                <p class="section-label mb-1">03 / INSPECCIÓN DE DATOS</p>
+                <h2 class="h1 mb-2">Explorador JSON</h2>
+                <p class="text-secondary">Inspeccioná la respuesta real que devuelve la API.</p>
+            </div>
+            <div class="card json-panel shadow-sm">
+                <div class="card-body">
+                    <div class="json-panel-header d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+                        <div>
+                            <p class="section-label mb-1">API RESPONSE</p>
+                            <h3 class="h5 mb-1">Respuesta general</h3>
+                            <p class="text-secondary mb-0">Datos originales de los videojuegos cargados.</p>
+                        </div>
+                        <div class="d-flex flex-wrap gap-2">
+                            <button id="refreshJson" class="btn btn-outline-primary" type="button">Actualizar</button>
+                            <button id="copyJson" class="btn btn-primary" type="button">Copiar JSON</button>
+                        </div>
+                    </div>
+                    <div class="json-toolbar d-flex justify-content-between gap-3 border-top border-bottom py-2 small text-secondary">
+                        <span class="json-file">● games-response.json</span>
+                        <span id="jsonCount">Esperando datos...</span>
+                    </div>
+                    <pre id="jsonOutput" class="json-code mt-3" tabindex="0"></pre>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="border-top py-4">
+        <div class="container d-flex flex-wrap justify-content-between align-items-center gap-2">
+            <a class="fw-bold text-primary text-decoration-none" href="index-bootstrap.html">◆ GameZone</a>
+            <p class="text-secondary small mb-0">Explorador de videojuegos · Datos de FreeToGame API</p>
+            <a class="small" href="opciones.html">Cambiar diseño</a>
+        </div>
+    </footer>
+</body>
+</html>
